@@ -30,7 +30,6 @@ class Settings(BaseSettings):
     # Storage
     UPLOAD_FOLDER: str = os.getenv("UPLOAD_FOLDER", "./uploads/")
 
-
     # CORS
     CORS_ORIGINS: List[str] = ["http://localhost:5173"]
 
