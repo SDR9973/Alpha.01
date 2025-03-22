@@ -4,7 +4,7 @@ import os
 import asyncio
 import typer
 
-from api.routes import auth, users, files, research, network
+from api.routes import auth, users, files, research, network, wikipedia
 from api.error_handlers import register_exception_handlers
 from infrastructure.persistence.database import Base, engine
 from config.settings import settings
@@ -32,12 +32,12 @@ app.add_middleware(
 )
 
 # Register routes
-app.include_router(auth.router)
-app.include_router(users.router)
-app.include_router(files.router)
-app.include_router(research.router)
-app.include_router(network.router)
-
+app.include_router(auth)
+app.include_router(users)
+app.include_router(files)
+app.include_router(research)
+app.include_router(network)
+app.include_router(wikipedia)
 # Register exception handlers
 register_exception_handlers(app)
 
@@ -67,6 +67,7 @@ def run_server(host: str = "127.0.0.1", port: int = 8000):
     import uvicorn
     typer.echo(f"Starting server at http://{host}:{port}")
     uvicorn.run("main:app", host=host, port=port, reload=settings.DEBUG)
+
 
 
 if __name__ == "__main__":

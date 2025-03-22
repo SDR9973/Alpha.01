@@ -91,8 +91,32 @@ def upgrade():
         sa.PrimaryKeyConstraint('id')
     )
 
+    # Create threads table
+    op.create_table(
+        'threads',
+        sa.Column('thread_id', postgresql.UUID(), nullable=False),
+        sa.Column('user_id', sa.String(), nullable=False),
+        sa.Column('wikipedia_title', sa.String(), nullable=False),
+        sa.Column('description', sa.String(), nullable=True),
+        sa.PrimaryKeyConstraint('thread_id')
+    )
+
+    # Create messages table
+    op.create_table(
+        'messages',
+        sa.Column('message_id', sa.Integer(), autoincrement=True, nullable=False),
+        sa.Column('thread_id', postgresql.UUID(), nullable=False),
+        sa.Column('timestamp', sa.DateTime(), nullable=False),
+        sa.Column('sender', sa.String(), nullable=False),
+        sa.Column('content', sa.String(), nullable=False),
+        sa.ForeignKeyConstraint(['thread_id'], ['threads.thread_id'], ),
+        sa.PrimaryKeyConstraint('message_id')
+    )
+
 def downgrade():
     # Drop tables in reverse order
+    op.drop_table('messages')
+    op.drop_table('threads')
     op.drop_table('links')
     op.drop_table('nodes')
     op.drop_table('network_analyses')
