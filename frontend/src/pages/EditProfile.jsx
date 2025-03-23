@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUser } from "../redux/user/userSlice";
+import { updateUser } from "../redux/user/userSlice.js";
 
 const EditProfile = () => {
   const navigate = useNavigate();

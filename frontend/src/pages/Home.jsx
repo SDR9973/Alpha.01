@@ -22,7 +22,7 @@ import { ForceGraph2D } from "react-force-graph";
 import "./Home.css";
 // Import custom styles
 import { AlertBox, GraphContainer } from "./Form.style.js";
-import AnonymizationToggle from "../components/AnonymizationToggle.jsx";
+import AnonymizationToggle from "../components/AnonymizationToggle.tsx";
 
 const Home = () => {
   const [name, setName] = useState("");

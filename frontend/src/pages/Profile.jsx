@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser, deleteUser } from "../redux/user/userSlice";
+import { logoutUser, deleteUser } from "../redux/user/userSlice.js";
 import Menu from "../components/Menu/Menu.jsx"; // Adjust the path if needed
 
 

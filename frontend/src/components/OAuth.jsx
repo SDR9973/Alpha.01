@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../firebase";
 import { useDispatch } from "react-redux";
-import { setUser } from "../redux/user/userSlice";
+import { setUser } from "../redux/user/userSlice.js";
 import { useNavigate } from "react-router-dom";
 
 const OAuth = () => {
