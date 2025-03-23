@@ -2,17 +2,27 @@
 import {
   UserResponse,
   NetworkAnalysisResponse,
-  ResearchResponse
+  ResearchResponse,
+  WikipediaSearchResult,
+  WikipediaPage,
+  WikipediaThread
 } from './api';
 
+/**
+ * Root state interface for the entire Redux store
+ */
 export interface RootState {
   user: UserState;
   file: FileState;
   network: NetworkState;
   ui: UIState;
   research: ResearchState;
+  wikipedia: WikipediaState;
 }
 
+/**
+ * User authentication and profile state
+ */
 export interface UserState {
   currentUser: UserResponse | null;
   token: string | null;
@@ -20,6 +30,9 @@ export interface UserState {
   error: string | null;
 }
 
+/**
+ * File upload and management state
+ */
 export interface FileState {
   uploadedFile: string | null;
   files: string[];
@@ -27,6 +40,9 @@ export interface FileState {
   error: string | null;
 }
 
+/**
+ * Network analysis state and parameters
+ */
 export interface NetworkState {
   networkData: NetworkAnalysisResponse | null;
   originalData: NetworkAnalysisResponse | null;
@@ -37,6 +53,9 @@ export interface NetworkState {
   error: string | null;
 }
 
+/**
+ * Parameters for network analysis filtering
+ */
 export interface AnalysisParams {
   startDate: string;
   endDate: string;
@@ -55,6 +74,9 @@ export interface AnalysisParams {
   isAnonymized: boolean;
 }
 
+/**
+ * UI state for controlling components visibility
+ */
 export interface UIState {
   showFilters: boolean;
   showMetrics: boolean;
@@ -64,6 +86,9 @@ export interface UIState {
   sidebarOpen: boolean;
 }
 
+/**
+ * Research project data management
+ */
 export interface ResearchState {
   researches: ResearchResponse[];
   currentResearch: ResearchFormData;
@@ -71,6 +96,9 @@ export interface ResearchState {
   error: string | null;
 }
 
+/**
+ * Form data for creating/editing research projects
+ */
 export interface ResearchFormData {
   name: string;
   description: string;
@@ -79,4 +107,42 @@ export interface ResearchFormData {
   messageLimit: number;
   fileName: string;
   anonymize: boolean;
+}
+
+/**
+ * Wikipedia integration state
+ */
+export interface WikipediaState {
+  searchResults: WikipediaSearchResult[];
+  selectedPage: WikipediaPage | null;
+  selectedTalkPage: WikipediaPage | null;
+  threads: WikipediaThread[];
+  currentThread: WikipediaThread | null;
+  loading: boolean;
+  error: string | null;
+}
+
+/**
+ * Network metrics data
+ */
+export interface NetworkMetrics {
+  density: number;
+  diameter: number;
+  reciprocity: number;
+  nodeCount: number;
+  edgeCount: number;
+  topNodes: TopNodeData[];
+}
+
+/**
+ * Data for nodes with highest centrality
+ */
+export interface TopNodeData {
+  id: string;
+  inDegree: number;
+  outDegree: number;
+  betweenness?: number;
+  closeness?: number;
+  eigenvector?: number;
+  pagerank?: number;
 }
