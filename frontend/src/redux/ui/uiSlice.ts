@@ -1,6 +1,16 @@
 // src/redux/ui/uiSlice.ts
-import {createSlice} from "@reduxjs/toolkit";
-import {initialState} from "./initialState.ts";
+import { createSlice } from "@reduxjs/toolkit";
+import { UIState } from "../../types/state";
+
+// Initial state
+const initialState: UIState = {
+  showFilters: true,
+  showMetrics: true,
+  showNetworkStats: false,
+  showDensity: false,
+  showDiameter: false,
+  sidebarOpen: false
+};
 
 // Slice
 const uiSlice = createSlice({

@@ -1,3 +1,4 @@
+// src/redux/research/asyncThunks.ts
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {ResearchFormData} from "../../types/state";
 import {ResearchResponse, WikipediaPage, WikipediaSearchResult} from "../../types/api";
