@@ -5,6 +5,7 @@ import asyncio
 import typer
 
 from api.routes import auth, users, files, research, network, wikipedia
+from api.routes.integrations import wikipedia_network
 from api.error_handlers import register_exception_handlers
 from infrastructure.persistence.database import Base, engine
 from config.settings import settings
@@ -22,7 +23,6 @@ app = FastAPI(
 )
 
 # Add CORS middleware
-# noinspection PyTypeChecker
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
@@ -38,6 +38,8 @@ app.include_router(files)
 app.include_router(research)
 app.include_router(network)
 app.include_router(wikipedia)
+app.include_router(wikipedia_network.router)
+
 # Register exception handlers
 register_exception_handlers(app)
 
@@ -60,14 +62,12 @@ def create_tables():
     typer.echo("Tables created successfully!")
 
 
-# noinspection HttpUrlsUsage
 @cli.command()
 def run_server(host: str = "127.0.0.1", port: int = 8000):
     """Run the API server."""
     import uvicorn
     typer.echo(f"Starting server at http://{host}:{port}")
     uvicorn.run("main:app", host=host, port=port, reload=settings.DEBUG)
-
 
 
 if __name__ == "__main__":

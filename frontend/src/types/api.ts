@@ -65,6 +65,7 @@ export interface NetworkNodeResponse {
   closeness: number;
   eigenvector: number;
   pagerank: number;
+  [key: string]: any; // For dynamic properties
 }
 
 /**
@@ -149,7 +150,7 @@ export interface WikipediaThreadResponse {
  * Message in a Wikipedia thread
  */
 export interface WikipediaThreadMessage {
-  id: string;
+  message_id: number;
   thread_id: string;
   timestamp: string;
   sender: string;
@@ -164,7 +165,7 @@ export interface WikipediaThread {
   user_id: string;
   wikipedia_title: string;
   description: string;
-  upload_date: string;
+  research_id?: string;
   messages?: WikipediaThreadMessage[];
 }
 

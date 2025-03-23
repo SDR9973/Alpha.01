@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from datetime import datetime
 from uuid import uuid4
 
@@ -86,18 +86,49 @@ async def get_wikipedia_talk_page(title: str) -> Dict[str, str]:
         raise Exception(f"Internal error retrieving talk page: {str(e)}")
 
 
-async def upload_wikipedia_thread(wikipedia_title: str, description: str, user_id: str) -> Dict[str, Any]:
+async def upload_wikipedia_thread(
+        wikipedia_title: str,
+        description: str,
+        user_id: str,
+        research_id: Optional[str] = None
+) -> Dict[str, Any]:
+    """
+    Upload a Wikipedia thread for analysis and optionally associate with a research project.
+
+    Args:
+        wikipedia_title: Title of the Wikipedia article
+        description: User-provided description of the thread
+        user_id: ID of the user uploading the thread
+        research_id: Optional ID of the research project to associate with
+
+    Returns:
+        Dictionary containing thread data and messages
+    """
     thread_id = str(uuid4())
     talk_content = await wiki_api.get_talk_page_content(wikipedia_title)
     messages = await parse_talk_page(talk_content)
+
+    # Prepare thread data
     thread_data = {
         "thread_id": thread_id,
         "user_id": user_id,
         "wikipedia_title": wikipedia_title,
         "description": description,
+        "research_id": research_id,
         "upload_date": datetime.utcnow()
     }
+
+    # Prepare message data
+    message_data = []
+    for i, msg in enumerate(messages):
+        message_data.append({
+            "thread_id": thread_id,
+            "timestamp": msg["timestamp"],
+            "sender": msg["sender"],
+            "content": msg["content"]
+        })
+
     return {
         "thread": thread_data,
-        "messages": messages
+        "messages": message_data
     }

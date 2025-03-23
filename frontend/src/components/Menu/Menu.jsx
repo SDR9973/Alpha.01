@@ -3,7 +3,6 @@ import { SidebarContainer, LogoContainer, MenuList, MenuItem } from "./Menu.styl
 import { House, FileText, Clock, BoxArrowRight, Person } from "react-bootstrap-icons";
 import LogoFull from "../../assets/Logo.png";
 import LogoMini from "../../assets/LogoMini.png";
-import { Container, Row, Col } from "react-bootstrap";
 
 const Menu = ({ isOpen, setIsOpen }) => {
   const toggleSidebar = () => {

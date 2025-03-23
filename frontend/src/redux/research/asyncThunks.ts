@@ -102,7 +102,7 @@ export const searchWikipedia = createAsyncThunk<
     WikipediaSearchResult[],
     string,
     { rejectValue: string }
->("research/searchWikipedia", async (query, {rejectWithValue}) => {
+>("research/asyncThunks", async (query, {rejectWithValue}) => {
     try {
         return await apiService.searchWikipedia(query);
     } catch (error) {
