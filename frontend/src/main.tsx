@@ -1,7 +1,7 @@
 import 'aframe';
 
 if (!window.AFRAME) {
-  window.AFRAME = require('aframe');
+  window.AFRAME = aframe;
 }
 
 console.log("AFRAME loaded:", window.AFRAME);
@@ -12,6 +12,8 @@ import { Provider } from "react-redux";
 import store from "./redux/store.js";
 import "./index.css";
 import App from "./App.tsx";
+
+import aframe from "aframe";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

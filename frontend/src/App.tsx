@@ -1,15 +1,16 @@
+// src/App.tsx
 import {useState} from "react";
 import PrivateRoute from "./components/PrivateRoute";
 import Header from "./components/Header/Header.jsx";
 import Menu from "./components/Menu/Menu.jsx";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home.js";
+import Home from "./pages/Home";
 import SignIn from "./pages/SignIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Profile from "./pages/Profile.jsx";
 import EditProfile from "./pages/EditProfile.jsx";
-
+import WikipediaIntegration from "./components/widgets/WikipediaIntegration.tsx";
 
 function App() {
     const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +27,7 @@ function App() {
                     <Route element={<PrivateRoute/>}>
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/edit-profile" element={<EditProfile/>}/>
+                        <Route path="/wikipedia" element={<WikipediaIntegration/>}/>
                     </Route>
                 </Routes>
             </div>
